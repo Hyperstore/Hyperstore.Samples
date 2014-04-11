@@ -1,0 +1,40 @@
+// Sample Domain model definition
+// Use Hyperstore Domain Language Editor extension to edit this file (http://visualstudiogallery.msdn.microsoft.com/7243e6ca-e7bd-44a6-92a5-50b0083f6287)
+
+// Set the domain as observable (Entities implements INotifyPropertyChanged and uses ObservableCollection)
+[observable]
+domain Hyperstore.Samples.LibrarySample.MyLibrary
+{
+    def entity NamedElement {
+		// Add a constraint on the name property (can be multiple)
+		// A constraint can be defined on a property or on an entity (after the } ). 
+        Name : string check "Name is required" : !String.IsNullOrEmpty(self.Name);
+    } 	 
+
+    def entity Library extends NamedElement
+    {
+		// OneToMany embedded reference (Embedded means Composition). Use -> for a non embedded relationship
+        Books   => Book*   : LibraryHasBooks;
+		// Read only references with filter (on an existing relationship)
+		AvalaibleBooks : LibraryHasBooks where item.Copies > 0;			
+        Members => Member* : LibraryHasMembers;
+        Loans   => Loan*   : LibraryHasLoans;
+    }
+
+    def entity Book {
+        Title  : string;
+        Copies : int check "Copies must be between 0 and 100" : self.Copies >= 0 && self.Copies <= 100;
+        Author : string;
+    }
+
+    def entity Member extends NamedElement {
+		// Opposite of the LibraryHasMembers relationship
+        Library *<- Library : LibraryHasMembers;
+		Loans <= Loan* : LoanReferencesMember;
+    }
+
+    def entity Loan {
+        Book   -> Book   : LoanReferencesBook; 
+        Member* -> Member : LoanReferencesMember;
+    }
+}
