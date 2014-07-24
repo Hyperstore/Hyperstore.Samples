@@ -35,11 +35,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
-            <Button Margin="5 5 0 5" Command="{Binding UndoCommand}">
-                <Image Source="http://www.gettyicons.com/download/?id=1168&amp;t=png&amp;s=16"/>
+            <Button Margin="5 5 0 5" Command="{Binding UndoCommand}" Content="Undo">                
             </Button>
-            <Button Margin="5" Command="{Binding RedoCommand}">
-                <Image Source="http://www.gettyicons.com/download/?id=1155&amp;t=png&amp;s=16"/>
+            <Button Margin="5" Command="{Binding RedoCommand}" Content="Redo">
+                
             </Button>
         </StackPanel>
         <DataGrid Margin="5" IsReadOnly="True" ItemsSource="{Binding Library.AvalaibleBooks}" SelectedValue="{Binding SelectedBook}" Grid.Row="1" AutoGenerateColumns="False">
