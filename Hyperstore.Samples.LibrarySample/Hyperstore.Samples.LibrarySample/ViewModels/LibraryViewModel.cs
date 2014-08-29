@@ -60,7 +60,7 @@ namespace Hyperstore.Samples.LibrarySample.ViewModels
 
             // Collaborative mode, show how the model is synchronized between muliples instances.
             // To try it, uncomment the following line and run several instances (outside Visual Studio) of the application (locally). Every change will be repercuted on other instances. 
-            //await InitializeCollaborativeMode(domain);
+            await InitializeCollaborativeMode(domain);
             
             wnd.DataContext = this;
         }
@@ -132,13 +132,17 @@ namespace Hyperstore.Samples.LibrarySample.ViewModels
         private async Task<IDomainModel> InitializeStore()
         {
             // Create a store
-            store = new Store();
-            // This optional step is used to include the command interceptor
-            await store.DependencyResolver.ComposeAsync(this.GetType().Assembly);
+            store = await StoreBuilder
+                        .New()
+                        // This optional step is used to include the command interceptor
+                        .ComposeWith(this.GetType().Assembly)
+                        .CreateAsync();
+
             // Load the library schema
-            await store.LoadSchemaAsync(new MyLibraryDefinition());
+            await store.Schemas.New<MyLibraryDefinition>().CreateAsync();
+
             // And instanciate a domain to manage all the elements of the domain
-            var domain = await store.CreateDomainModelAsync("MyLib");
+            var domain = await store.DomainModels.New().CreateAsync("MyLib");
             // Set as default domain
             store.DefaultSessionConfiguration.DefaultDomainModel = domain;
             return domain;
