@@ -1,0 +1,11 @@
+// Sample Domain model definition
+// Use Hyperstore Domain Language Editor extension to edit this file.
+[observable]
+domain Hyperstore.Samples.Overview.MyModel
+{
+    def entity Customer {
+        FirstName : string;
+        LastName : string;
+        FullName : string compute {return FirstName + " " + LastName;  };
+    }
+}
