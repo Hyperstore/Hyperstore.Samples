@@ -1,5 +1,6 @@
-﻿## Hyperstore sample
+## Hyperstore samples
 
+### Overview
 Simple WPF application using a simple Hyperstore domain containing only one Customer.
 
 This sample shows you how it's easy to define an observable domain including the following features :
