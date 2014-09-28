@@ -1,0 +1,41 @@
+// Sample Domain model definition
+// Use Hyperstore Domain Language Editor extension to edit this file.
+
+[observable]  // Set the domain as observable (Binding ready)
+domain Hyperstore.Samples.Overview.MyModel
+{
+    // Custom type : Email address
+    def valueObject Email : string
+    {
+        constraints:
+			// Implicit constraint (run on every property change of type Email) 
+			// Emit a warning message : Warning message doesn't abort the change.
+            check warning "Invalid email address" 
+            {
+			    // Check if email is valid
+                if( value != null)
+                {
+                    try {new System.Net.Mail.MailAddress(value);}
+                    catch {return false;}
+                }
+                return true;
+            };
+    }
+
+
+    // Customer entity
+    def entity Customer 
+	{
+        // Simple string property
+        FirstName : string;
+    
+	    // Simple string property
+        LastName : string;
+    
+	    // Calculated property     
+	    FullName : string compute {return FirstName + " " + LastName;  };
+    
+	    // Property with custom type
+        Email : Email;
+    }
+}

@@ -1,4 +1,4 @@
-﻿Sample for Hyperstore (http://www.zenasoft.com)
+﻿Sample for Hyperstore (http://www.hyperstore.org)
 
 In this sample, we will see how to define a new domain containing validation rules and how to use it in an WPF application. The following topics will be saw  :
 
