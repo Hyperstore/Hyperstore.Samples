@@ -8,7 +8,7 @@ domain Hyperstore.Samples.LibrarySample.MyLibrary
     def entity NamedElement {
 		// Add a constraint on the name property (can be multiple)
 		// A constraint can be defined on a property or on an entity (after the } ). 
-        Name : string check "Name is required" : !String.IsNullOrEmpty(self.Name);
+        Name : string check error "Name is required" { !String.IsNullOrEmpty(self.Name) };
     } 	 
 
     def entity Library extends NamedElement
@@ -16,25 +16,26 @@ domain Hyperstore.Samples.LibrarySample.MyLibrary
 		// OneToMany embedded reference (Embedded means Composition). Use -> for a non embedded relationship
         Books   => Book*   : LibraryHasBooks;
 		// Read only references with filter (on an existing relationship)
-		AvalaibleBooks : LibraryHasBooks where item.Copies > 0;			
+		AvalaibleBooks : LibraryHasBooks where { item.Copies > 0};			
         Members => Member* : LibraryHasMembers;
         Loans   => Loan*   : LibraryHasLoans;
     }
 
     def entity Book {
         Title  : string;
-        Copies : int check "Copies must be between 0 and 100" : self.Copies >= 0 && self.Copies <= 100;
+        Copies : int check error "Copies must be between 0 and 100" { self.Copies >= 0 && self.Copies <= 100};
         Author : string;
     }
 
     def entity Member extends NamedElement {
 		// Opposite of the LibraryHasMembers relationship
-        Library *<- Library : LibraryHasMembers;
-		Loans <= Loan* : LoanReferencesMember;
+        Library *<= Library : LibraryHasMembers;
+		Loans <- Loan* : LoanReferencesMember;
     }
 
     def entity Loan {
         Book   -> Book   : LoanReferencesBook; 
         Member* -> Member : LoanReferencesMember;
     }
+
 }

@@ -60,7 +60,7 @@ namespace Hyperstore.Samples.LibrarySample.ViewModels
 
             // Collaborative mode, show how the model is synchronized between muliples instances.
             // To try it, uncomment the following line and run several instances (outside Visual Studio) of the application (locally). Every change will be repercuted on other instances. 
-            await InitializeCollaborativeMode(domain);
+            // await InitializeCollaborativeMode(domain);
             
             wnd.DataContext = this;
         }
