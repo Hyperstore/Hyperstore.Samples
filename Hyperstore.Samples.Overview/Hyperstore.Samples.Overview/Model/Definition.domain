@@ -12,13 +12,16 @@ domain Hyperstore.Samples.Overview.MyModel
 			// Emit a warning message : Warning message doesn't abort the change.
             check warning "Invalid email address" 
             {
-			    // Check if email is valid
-                if( value != null)
-                {
-                    try {new System.Net.Mail.MailAddress(value);}
-                    catch {return false;}
-                }
-                return true;
+				// Lambda expression or code block
+			    {
+					// Check if email is valid
+					if( value != null)
+					{
+						try {new System.Net.Mail.MailAddress(value);}
+						catch {return false;}
+					}
+					return true;
+				}
             };
     }
 
@@ -33,7 +36,7 @@ domain Hyperstore.Samples.Overview.MyModel
         LastName : string;
     
 	    // Calculated property     
-	    FullName : string compute {return FirstName + " " + LastName;  };
+	    FullName : string compute { FirstName + " " + LastName };
     
 	    // Property with custom type
         Email : Email;
