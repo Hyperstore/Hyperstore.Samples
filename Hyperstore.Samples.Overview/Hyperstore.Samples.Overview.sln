@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7140F8
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projections", "..\Hyperstore.Samples.Projections\Projections\Projections.csproj", "{A09F338A-4162-4129-B2C3-3CD92847B246}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{72171685-B4FE-4A89-9122-CE87BEC47A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72171685-B4FE-4A89-9122-CE87BEC47A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72171685-B4FE-4A89-9122-CE87BEC47A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09F338A-4162-4129-B2C3-3CD92847B246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09F338A-4162-4129-B2C3-3CD92847B246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09F338A-4162-4129-B2C3-3CD92847B246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09F338A-4162-4129-B2C3-3CD92847B246}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

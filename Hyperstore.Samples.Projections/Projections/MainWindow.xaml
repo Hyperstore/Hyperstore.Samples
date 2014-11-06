@@ -1,0 +1,48 @@
+﻿<Window x:Class="Hyperstore.Samples.Projections.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Title="Hyperstore Samples" Height="350" Width="525" WindowStyle="ThreeDBorderWindow">
+    <Window.Resources>
+        <ResourceDictionary Source="Themes/ExpressionDark.xaml"/>       
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ControlTemplate x:Key="InputErrorTemplate">
+                    <DockPanel>
+                        <Ellipse DockPanel.Dock="Right" Margin="2,0" 
+                    ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=errorAdorner}"
+                    Width="10" Height="10">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#11FF1111" Offset="0" />
+                                    <GradientStop Color="#FFFF0000" Offset="1" />
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <AdornedElementPlaceholder x:Name="errorAdorner" />
+                    </DockPanel>
+                </ControlTemplate>
+
+                <Style TargetType="TextBox">
+                    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource InputErrorTemplate}" />
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Border BorderBrush="{DynamicResource NormalBorderBrush}" CornerRadius="10" BorderThickness="2" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch"/>
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid ItemsSource="{Binding Library.AvailableBooks}"/>
+            <DataGrid Grid.Column="1" ItemsSource="{Binding Library.Members}"/>
+        </Grid>
+    </Grid>
+</Window>
